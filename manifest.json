@@ -6,6 +6,60 @@
   "default_locale": "en-us",
   "settings": [
     {
+      "label": "colors_group_label",
+      "variables": [
+        {
+          "identifier": "brand_color",
+          "type": "color",
+          "description": "brand_color_description",
+          "label": "brand_color_label",
+          "value": "#5BE0B0"
+        },
+        {
+          "identifier": "brand_text_color",
+          "type": "color",
+          "description": "brand_text_color_description",
+          "label": "brand_text_color_label",
+          "value": "#0B2A22"
+        },
+        {
+          "identifier": "text_color",
+          "type": "color",
+          "description": "text_color_description",
+          "label": "text_color_label",
+          "value": "#F2F4F9"
+        },
+        {
+          "identifier": "link_color",
+          "type": "color",
+          "description": "link_color_description",
+          "label": "link_color_label",
+          "value": "#5BE0B0"
+        },
+        {
+          "identifier": "hover_link_color",
+          "type": "color",
+          "description": "hover_link_color_description",
+          "label": "hover_link_color_label",
+          "value": "#2BB089"
+        },
+        {
+          "identifier": "visited_link_color",
+          "type": "color",
+          "description": "visited_link_color_description",
+          "label": "visited_link_color_label",
+          "value": "#6FA3E8"
+        },
+        {
+          "identifier": "background_color",
+          "type": "color",
+          "description": "background_color_description",
+          "label": "background_color_label",
+          "value": "#0C172F"
+        }
+      ]
+    },
+    {
       "label": "brand_group_label",
       "variables": [
         {
