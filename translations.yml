@@ -218,3 +218,53 @@ parts:
       screenshot: "https://drive.google.com/file/d/18d736vhJIuaYHO_uPeg9E4IBaVnJCoVM/view?usp=sharing"
       value: "Requests list"
       obsolete: "2026-04-01"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.scoped_community_search_label"
+      title: "Label for the scoped community search setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Scoped search in Community"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.scoped_community_search_description"
+      title: "Description for the scoped community search setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Search results are confined to the topic the user is in"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.community_post_group_label"
+      title: "Label for the community post elements settings group"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Community post elements"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.follow_post_label"
+      title: "Label for the follow post setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Follow"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.follow_post_description"
+      title: "Description for the follow post setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Users can follow a specific post"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.post_sharing_label"
+      title: "Label for the post social media sharing setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Social sharing"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.post_sharing_description"
+      title: "Description for the post social media sharing setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Show social media sharing on post"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.community_topic_group_label"
+      title: "Label for the community topic elements settings group"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Community topic elements"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.follow_topic_label"
+      title: "Label for the follow topic setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Follow"
+  - translation:
+      key: "txt.help_center_copenhagen_theme.follow_topic_description"
+      title: "Description for the follow topic setting"
+      screenshot: "https://drive.google.com/open?id=1uZaNe12E-A_snTd_7AjcqirB4ROLF4bB"
+      value: "Users can follow a specific topic"
