@@ -49,7 +49,7 @@
     <div class="footer-bottom">
       <span>© 2026 Coverly Mobile, Inc. — Made for travelers, by travelers.</span>
 
-      <span style="display: inline-flex; align-items: center; gap: 16px;">
+      <div style="display: inline-flex; align-items: center; gap: 16px;">
         <span class="status-chip"><span class="status-dot"></span> All systems normal</span>
 
         <div class="footer-language-selector">
@@ -61,15 +61,15 @@
                   <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
                 </svg>
               </button>
-              <span class="dropdown-menu dropdown-menu-end" role="menu">
+              <div class="dropdown-menu dropdown-menu-end" role="menu">
                 {{#each alternative_locales}}
                   <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">{{name}}</a>
                 {{/each}}
-              </span>
+              </div>
             </div>
           {{/if}}
         </div>
-      </span>
+      </div>
     </div>
   </div>
 </footer>
