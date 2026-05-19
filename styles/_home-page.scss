@@ -198,6 +198,12 @@
   &:nth-child(2n) { border-right: none; }
   &:nth-last-child(-n+2) { border-bottom: none; }
 
+  // When the item count is odd in the 2-col layout, the last item sits alone
+  // in its row — strip its dangling right border.
+  &:last-child:nth-child(odd) {
+    border-right: none;
+  }
+
   @media (max-width: 700px) {
     border-right: none;
 
