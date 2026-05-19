@@ -21,29 +21,29 @@ $padding-right: 20px;
     border-color: $brand_color;
   }
 
-  input[type="search"], 
+  input[type="search"],
   .clear-button {
-    background-color: #fff;
+    background-color: var(--bg-elev);
     border-radius: 30px;
     border: none;
   }
 
-  &-full input[type="search"], 
+  &-full input[type="search"],
   &-full .clear-button {
-    border-color: #fff;
+    border-color: var(--bg-elev);
   }
 
   input[type="search"] {
     appearance: none;
     -webkit-appearance: none;
     box-sizing: border-box;
-    color: $field-text-color;
+    color: var(--ink);
     flex: 1 1 auto;
     height: 40px;
     width: 100%;
 
     &:focus {
-      color: $field-text-focus-color;
+      color: var(--ink);
     }
 
     &::-webkit-search-decoration,
@@ -54,9 +54,10 @@ $padding-right: 20px;
     }
 
     &:-webkit-autofill,
-    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0 1000px #fff inset;
+      -webkit-box-shadow: 0 0 0 1000px var(--bg-elev) inset;
+      -webkit-text-fill-color: var(--ink);
     }
 
   }

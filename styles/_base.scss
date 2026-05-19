@@ -79,8 +79,10 @@ ul {
   padding: 0;
 }
 
-/***** Form input baseline (consumed by hbs-form / .search and legacy partials) *****/
-.hbs-form, .search {
+/***** Form input baseline (only .hbs-form here — .search is overridden by _search.scss
+       which has higher-specificity rules; that partial has been patched directly for
+       dark-theme readability) *****/
+.hbs-form {
   input,
   textarea {
     color: var(--ink);
