@@ -1,34 +1,61 @@
-// Variables
+// Variables — rebound to the Coverly palette so legacy Copenhagen partials
+// inherit the new design without further changes. The new partials reference
+// CSS custom properties directly (defined in :root in _base.scss).
 
-// Colors
-$hover-button-color: zass-darken($brand_color, 20%);
-$secondary-text-color: zass-lighten($text_color, 20%);
+// Coverly palette (mirrors the --tokens defined in _base.scss :root)
+$coverly-bg:           #0C172F;
+$coverly-bg-elev:      #142446;
+$coverly-bg-tint:      #1B2C53;
+$coverly-ink:          #F2F4F9;
+$coverly-ink-soft:     #B6C3DD;
+$coverly-ink-mute:     #6E7FA4;
+$coverly-line:         #25366A;
+$coverly-line-strong:  #38498A;
+$coverly-primary:      #5BE0B0;
+$coverly-primary-ink:  #0B2A22;
+$coverly-accent:       #6FA3E8;
+$coverly-mint-deep:    #2BB089;
 
-$primary-shade: zass-darken($background_color, 3%); //#f8f8f8 for the default background_color
-$secondary-shade: zass-darken($background_color, 5%); //#f2f2f2 for the default background_color
+// Legacy Zass-injected vars (originally driven by manifest.json settings,
+// now hardcoded since manifest no longer exposes color/font settings).
+// Names must match what existing partials reference.
+$brand_color:          $coverly-primary;
+$brand_text_color:     $coverly-primary-ink;
+$text_color:           $coverly-ink;
+$background_color:     $coverly-bg;
+$link_color:           $coverly-primary;
+$hover_link_color:     $coverly-mint-deep;
+$visited_link_color:   $coverly-accent;
+$heading_font:         "Newsreader", "Georgia", serif;
+$text_font:            "Manrope", system-ui, sans-serif;
 
-$font-size-bigger: 16px;
-$font-size-base: 15px;
+// Derived
+$hover-button-color:   $coverly-mint-deep;
+$secondary-text-color: $coverly-ink-soft;
+$primary-shade:        $coverly-bg-elev;
+$secondary-shade:      $coverly-bg-tint;
+
+$font-size-bigger:     16px;
+$font-size-base:       15px;
 $font-size-navigation: 14px;
-$font-size-small: 13px;
-$font-size-smaller: 11px;
+$font-size-small:      13px;
+$font-size-smaller:    11px;
 
-$high-contrast-border-color: #848F99; // maintains a 3:1 contrast ratio with default background color (#FFF). Use for controls and inputs
-$low-contrast-border-color: #ddd; // less than 3:1 contrast ratio with default background color. Use for elements that do not require user interaction
-$menu-border-color: #d8dcde;
+$high-contrast-border-color: $coverly-line-strong;
+$low-contrast-border-color:  $coverly-line;
+$menu-border-color:          $coverly-line;
 
-$button-color: $brand_color;
+$button-color:               $coverly-primary;
 
-$input-font-size: 14px;
-$field-text-color: #666;
-$field-text-focus-color: #555;
+$input-font-size:            14px;
+$field-text-color:           $coverly-ink-soft;
+$field-text-focus-color:     $coverly-ink;
 
-// Breakpoints variables
-$tablet-width: 768px;
-$desktop-width: 1024px;
-$max-width-container: 1160px;
+// Breakpoints
+$tablet-width:         768px;
+$desktop-width:        1024px;
+$max-width-container:  1200px; // bumped from 1160px to match Coverly's .wrap
 
 $font-weight-semibold: 600;
 
-// Transitions
-$input-transition: border .12s ease-in-out;
+$input-transition:     border .12s ease-in-out;
