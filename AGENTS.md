@@ -130,3 +130,58 @@ You can exit preview mode in the UI or by visiting https://glean-73565.zendesk.c
 ```
 
 You will be asked to login with a user. You will need to pause and ask the user to login using their Zendesk credentials + MFA for you to be able to proceed.
+
+## Coverly theme conventions
+
+This is a Coverly-branded Help Center theme. A few conventions are worth knowing when authoring or extending:
+
+### Category icons
+
+The home page renders a category icon next to each `.cat-card`. Icons are inline SVG, keyed off the category **name** (not id, because Zendesk's `category.id` is numeric), in `templates/home_page.hbs`. The current mapping covers:
+
+- `"Getting started"` → compass
+- `"Installing your eSIM"` → download
+- `"Plans & coverage"` → globe
+- `"Account & billing"` → wallet
+- `"Troubleshooting"` → wrench
+- `"Travel tips"` → suitcase
+- *any other name* → generic document icon (fallback)
+
+To add a new icon, edit the `{{#is name "…"}}` chain in `home_page.hbs` and add a new `{{else}}{{#is name "Your Display Name"}}…<svg>…{{/is}}` branch before the fallback. The chain must end with the existing six `{{/is}}` closing tags.
+
+### Article body styling
+
+Standard WYSIWYG output (h2, h3, h4, p, ul, ol, blockquote, code, pre, img, table) is styled by default. Two opt-in classes provide bespoke editorial treatments:
+
+- **`.callout`** — accent-bordered block for tips and important notes. Wrap your callout text in `<div class="callout">…</div>` in the article HTML source.
+- **`.step-card`** — numbered card for step-by-step instructions. Markup:
+  ```html
+  <div class="step-card">
+    <div class="step-num">01</div>
+    <div class="step-body">
+      <strong>Headline</strong>
+      <span>Detail copy</span>
+    </div>
+  </div>
+  ```
+
+Authors who want these treatments need to paste the raw HTML via the WYSIWYG editor's source-edit mode.
+
+### Branded assets
+
+- `assets/coverly-icon.png` — default logo, overridden when `settings.logo` is set
+- `assets/umbrellas.jpg` — default hero background, referenced via the Zass-injected SCSS variable `$assets-umbrellas-jpg` in `styles/_hero.scss`
+
+The Zass plugin (`zass.mjs`) automatically generates `$assets-<name>-<ext>` SCSS variables for every file in `assets/`. Reference them in SCSS as `url($assets-name-ext)` — the literal token is preserved through compilation and Zendesk substitutes the real CDN URL server-side at request time.
+
+### Dark theme is hardcoded
+
+`manifest.json` no longer exposes color or font settings. The palette and typography are baked into `styles/_variables.scss` (SCSS) and `styles/_base.scss` (CSS custom properties on `:root`). Adjust both files together when changing tokens.
+
+### Article comments dropped
+
+The article page template (`templates/article_page.hbs`) does not render comments. If you need comments back, restore the `{{#if settings.show_article_comments}}` block from Copenhagen's original article_page.hbs and re-add the setting to `manifest.json`.
+
+### Out-of-scope pages
+
+This migration explicitly only restyles home, category, section, and article pages plus header/footer/document_head. Other pages (search results, request forms, community, profile, service catalog, approval requests, error pages, contributions) use Copenhagen's existing templates but inherit the new dark palette via SCSS variable rebinding in `_variables.scss`. They may have minor styling quirks since they weren't designed for a dark background.
