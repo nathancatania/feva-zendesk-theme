@@ -83,6 +83,15 @@
     align-items: center;
     gap: 6px;
   }
+
+  .article-subscribe {
+    margin-left: auto;
+
+    @media (max-width: 600px) {
+      margin-left: 0;
+      margin-top: 8px;
+    }
+  }
 }
 
 /***** Sidebar (articles in section) — gated by settings.show_articles_in_section *****/
@@ -381,6 +390,29 @@
     margin-top: 16px;
     font-size: 0.92rem;
     color: var(--ink-soft);
+  }
+}
+
+/***** Request callout (Zendesk's {{request_callout}} CTA) *****/
+.article-more-questions {
+  margin: 24px 0 40px;
+  padding: 24px 28px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-align: center;
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+
+  a,
+  .request_callout_link {
+    color: var(--primary);
+    font-weight: 600;
+    margin-left: 6px;
+
+    &:hover {
+      color: var(--brand-mint-deep);
+    }
   }
 }
 
