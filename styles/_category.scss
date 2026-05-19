@@ -23,6 +23,7 @@
   .lead,
   .page-header-description {
     font-size: 1.12rem;
+    font-style: normal;
     color: var(--ink-soft);
     margin: 0;
     max-width: 60ch;
@@ -82,10 +83,9 @@
 .article-list-item {
   // Zendesk's default article markup emits <li> with an <a class="article-list-link">.
   // Restyle to look like an .article-row.
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 22px;
+  display: flex;
   align-items: center;
+  gap: 12px;
   padding: 18px 0;
   border-bottom: 1px solid var(--line);
   transition: padding .15s;
@@ -97,6 +97,7 @@
   }
 
   .article-list-link {
+    flex: 1;
     font-size: 1.05rem;
     font-weight: 500;
     color: var(--ink);
@@ -106,6 +107,7 @@
   .icon-star,
   .icon-lock {
     color: var(--accent);
+    flex-shrink: 0;
   }
 }
 
@@ -167,9 +169,11 @@
 /***** Sub-nav (search + breadcrumbs row above category/section pages) *****/
 .sub-nav {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 16px;
   padding: 16px 0;
+  margin-bottom: 0;
   flex-wrap: wrap;
 
   .search-container {
