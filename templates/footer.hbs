@@ -1,25 +1,75 @@
 <footer class="footer">
   <div class="footer-inner">
-    {{#link 'help_center'}}{{help_center.name}}{{/link}}
-
-    <div class="footer-language-selector">
-      {{#if alternative_locales}}
-        <div class="dropdown language-selector">
-          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-            {{current_locale.name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </button>
-          <span class="dropdown-menu dropdown-menu-end" role="menu">
-            {{#each alternative_locales}}
-              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
-                {{name}}
-              </a>
-            {{/each}}
-          </span>
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 14px;">
+          {{#if settings.logo}}
+            <img src="{{settings.logo}}" alt="" />
+          {{else}}
+            <img src="{{asset 'coverly-icon.png'}}" alt="" />
+          {{/if}}
+          <span class="brand-name">{{help_center.name}}</span>
         </div>
-      {{/if}}
+        <p class="signature">
+          Travel eSIMs that just work — in 190+ countries, no roaming surprises, no plastic SIM swap.
+        </p>
+      </div>
+
+      <div>
+        <h5>Help</h5>
+        <ul>
+          <li>{{link 'help_center'}}</li>
+          <li>{{link 'new_request'}}</li>
+          <li>{{link 'community'}}</li>
+          <li>{{link 'service_catalog'}}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Coverly</h5>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Affiliates</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Terms of service</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Fair-use policy</a></li>
+          <li><a href="#">System status</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Coverly Mobile, Inc. — Made for travelers, by travelers.</span>
+
+      <span style="display: inline-flex; align-items: center; gap: 16px;">
+        <span class="status-chip"><span class="status-dot"></span> All systems normal</span>
+
+        <div class="footer-language-selector">
+          {{#if alternative_locales}}
+            <div class="dropdown language-selector">
+              <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                {{current_locale.name}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+                </svg>
+              </button>
+              <span class="dropdown-menu dropdown-menu-end" role="menu">
+                {{#each alternative_locales}}
+                  <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">{{name}}</a>
+                {{/each}}
+              </span>
+            </div>
+          {{/if}}
+        </div>
+      </span>
     </div>
   </div>
 </footer>
