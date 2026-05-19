@@ -1,28 +1,93 @@
-/***** Footer *****/
 .footer {
-  border-top: 1px solid $low-contrast-border-color;
-  margin-top: 60px;
-  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  background: var(--bg-tint);
+  padding: 56px 0 32px;
+  margin-top: 80px;
+}
 
-  a {
-    color: $secondary-text-color;
-  }
+.footer-inner {
+  // Keep selector for untouched templates that still emit it.
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
-  &-inner {
-    @include max-width-container;
-    display: flex;
-    justify-content: space-between;
-  }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 40px;
 
-  &-language-selector button {
-    color: $secondary-text-color;
-    display: inline-block;
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-.powered-by-zendesk {
-  a,
-  a:visited {
-    color: $secondary-text-color;
+.footer {
+  h5 {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 14px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    a {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+
+      &:hover { color: var(--ink); }
+    }
+  }
+
+  .signature {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: 36ch;
+    margin-top: 12px;
+  }
+
+  .brand img { width: 32px; height: 32px; }
+  .brand .brand-name { font-size: 1.4rem; }
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin-top: 42px;
+  font-size: 0.84rem;
+  color: var(--ink-mute);
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+}
+
+.footer-language-selector {
+  // Inline language selector — uses Copenhagen .dropdown markup.
+  .dropdown-toggle {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover { color: var(--ink); }
   }
 }
