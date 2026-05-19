@@ -7,13 +7,11 @@
   background: var(--bg-elev);
 
   &[data-style="photo"] {
-    background: var(--bg-elev);
-
     &::before {
       content: "";
       position: absolute;
       inset: -10px;
-      background-image: url("../assets/umbrellas.jpg");
+      background-image: url($assets-umbrellas-jpg);
       background-size: cover;
       background-position: center 38%;
       filter: blur(8px) saturate(1.05);
@@ -64,6 +62,7 @@
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
@@ -182,6 +181,7 @@
     padding: 7px 14px;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
+    -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     border-radius: 999px;
     font-size: 0.85rem;
@@ -212,4 +212,9 @@
       margin-top: 4px;
     }
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-glow::before,
+  .search-glow::after { animation: none; }
 }
