@@ -1,4 +1,8 @@
 .page-header {
+  // Override _page_header.scss's `display: flex; flex-direction: row` (tablet+)
+  // so children stack vertically: eyebrow → h1 → description → stats. Markup
+  // already encodes the right order.
+  display: block;
   padding: 24px 0 48px;
 
   .eyebrow {
