@@ -28,7 +28,11 @@
     }
   }
 
-  h1 {
+  h1,
+  h2 {
+    // Targets both h1 and h2 so the display sizing applies regardless of heading
+    // level — we use h2.display on the home page to keep a single h1 (the
+    // visually-hidden site name) for a11y.
     font-family: var(--font-display);
     font-weight: var(--display-weight);
     letter-spacing: var(--display-tracking);
