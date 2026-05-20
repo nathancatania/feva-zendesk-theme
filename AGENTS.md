@@ -139,15 +139,21 @@ This is a Coverly-branded Help Center theme. A few conventions are worth knowing
 
 The home page renders a category icon next to each `.cat-card`. Icons are inline SVG, keyed off the category **name** (not id, because Zendesk's `category.id` is numeric), in `templates/home_page.hbs`. The current mapping covers:
 
-- `"Getting started"` → compass
-- `"Installing your eSIM"` → download
-- `"Plans & coverage"` → globe
-- `"Account & billing"` → wallet
+- `"Getting Started with Coverly"` → compass
+- `"Buying Plans & Billing"` → wallet
+- `"Installing & Activating Your eSIM"` → download
+- `"Device Compatibility"` → smartphone
+- `"Coverage & Networks"` → globe
+- `"Using the Coverly Mobile App"` → smartphone
+- `"Account, Privacy & Security"` → shield
 - `"Troubleshooting"` → wrench
-- `"Travel tips"` → suitcase
+- `"Destination & Region Guides"` → suitcase
+- `"Coverly for Business"` → briefcase
+- `"Coverly Stores & Airport Kiosks"` → map-pin
+- `"About Coverly"` → info
 - *any other name* → generic document icon (fallback)
 
-To add a new icon, edit the `{{#is name "…"}}` chain in `home_page.hbs` and add a new `{{else}}{{#is name "Your Display Name"}}…<svg>…{{/is}}` branch before the fallback. The chain must end with the existing six `{{/is}}` closing tags.
+To add a new icon, edit the `{{#is name "…"}}` chain in `home_page.hbs` and add a new `{{else}}{{#is name "Your Display Name"}}…<svg>…{{/is}}` branch before the fallback. The chain must end with one `{{/is}}` per `{{#is}}` opener (currently 12 of each).
 
 ### Article body styling
 
