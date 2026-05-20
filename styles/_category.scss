@@ -1,59 +1,187 @@
-/***** Category pages *****/
-.category {
-  &-container {
-    display: flex;
-    justify-content: flex-end;
+.page-header {
+  // Override _page_header.scss's `display: flex; flex-direction: row` (tablet+)
+  // so children stack vertically: eyebrow → h1 → description → stats. Markup
+  // already encodes the right order.
+  display: block;
+  padding: 24px 0 48px;
+
+  .eyebrow {
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
   }
 
-  &-content {
-    @include desktop {
-      flex: 0 0 80%;
-    }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    margin: 8px 0 12px;
+    line-height: 1.05;
+    max-width: 22ch;
+    color: var(--ink);
+  }
 
-    flex: 1;
-    max-width: 100%;
+  .lead,
+  .page-header-description {
+    font-size: 1.12rem;
+    font-style: normal;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 22px;
+    font-size: 0.88rem;
+    color: var(--ink-mute);
+    flex-wrap: wrap;
+
+    strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
   }
 }
 
-.section-tree {
-  @include tablet { flex-direction: row; }
+.section-block,
+.section-tree .section {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+
+  h3,
+  .section-tree-title {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+    font-size: 1.5rem;
+    margin: 0 0 4px;
+    color: var(--ink);
+
+    a { color: inherit; }
+  }
+
+  .sec-meta {
+    font-size: 0.85rem;
+    color: var(--ink-mute);
+    margin-bottom: 14px;
+  }
+}
+
+/***** Article list + article row (shared by category, section, search) *****/
+.article-list {
   display: flex;
   flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.article-list-item {
+  // Zendesk's default article markup emits <li> with an <a class="article-list-link">.
+  // Restyle to look like an .article-row.
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding .15s;
+
+  &:hover {
+    padding-left: 8px;
+
+    .article-list-link { color: var(--primary); }
+  }
+
+  .article-list-link {
+    flex: 1;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: color .15s;
+  }
+
+  .icon-star,
+  .icon-lock {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+}
+
+.article-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: padding .15s;
+  color: inherit;
+
+  &:hover {
+    padding-left: 8px;
+    text-decoration: none;
+
+    .article-title { color: var(--primary); }
+  }
+
+  .article-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: color .15s;
+  }
+
+  .article-sub {
+    font-size: 0.84rem;
+    color: var(--ink-mute);
+    margin-top: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    max-width: 320px;
+    justify-content: flex-end;
+  }
+}
+
+.see-all-articles {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+
+  &:hover { gap: 10px; }
+}
+
+/***** Sub-nav (search + breadcrumbs row above category/section pages) *****/
+.sub-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  margin-bottom: 0;
   flex-wrap: wrap;
-  justify-content: space-between;
 
-  .section {
-    @include tablet { flex: 0 0 45%; /* Two columns for tablet and desktop. Leaving 5% separation between columns */ }
-    flex: initial;
-    max-width: 100%;
+  .search-container {
+    margin-left: auto;
+    flex: 0 1 320px;
   }
-
-  &-title {
-    margin-bottom: 0;
-    font-size: 18px;
-    font-weight: $font-weight-semibold;
-
-    a { color: $text_color; }
-  }
-
-  .see-all-articles {
-    display: block;
-    padding: 15px 0;
-  }
-}
-
-.article-list {
-  &-item {
-    font-size: $font-size-bigger;
-    padding: 15px 0;
-    text-overflow: ellipsis;
-    overflow: hidden;
-
-    a { color: $text_color; }
-  }
-}
-
-.icon-star {
-  color: $brand_color;
-  font-size: 18px;
 }

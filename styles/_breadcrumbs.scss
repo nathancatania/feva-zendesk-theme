@@ -1,29 +1,49 @@
-/***** Breadcrumbs *****/
+// Coverly breadcrumbs — Zendesk's {{breadcrumbs}} helper emits its own markup.
+// Style both Coverly's .crumbs class (if used directly) and Zendesk's default.
+
+.crumbs,
 .breadcrumbs {
-  @include tablet {
-    margin: 0;
+  // Zendesk's {{breadcrumbs}} helper emits <ol class="breadcrumbs">, which
+  // inherits decimal markers and 40px inline-start padding from the UA. Reset
+  // here so the markup-vs-design alignment matches and "1." / "2." don't show.
+  list-style: none;
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.88rem;
+  color: var(--ink-mute);
+  padding: 26px 0;
+  flex-wrap: wrap;
+
+  a {
+    color: var(--ink-mute);
+    transition: color .15s;
+
+    &:hover { color: var(--primary); }
   }
 
-  margin: 0 0 15px 0;
-  padding: 0;
-  display: flex;
+  .sep,
+  & > li + li::before {
+    color: var(--ink-mute);
+    opacity: 0.5;
+    content: "/";
+    margin-right: 8px;
+  }
 
-  li {
-    display: inline-block;
-    color: $secondary-text-color;
-    font-size: $font-size-small;
-    max-width: 450px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .current,
+  & > li:last-child {
+    color: var(--ink);
+  }
 
-    + li::before {
-      content: ">";
-      margin: 0 4px;
-    }
-
-    a:visited {
-      color: $link_color;
-    }
+  // Zendesk's breadcrumbs helper renders a <ol> with <li> items.
+  ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
   }
 }

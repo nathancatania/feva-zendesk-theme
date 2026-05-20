@@ -1,81 +1,326 @@
-/***** Homepage *****/
+/***** Block spacing (used across home + secondary sections) *****/
+.block        { padding: 80px 0; }
+.block-tight  { padding: 56px 0; }
 
-.section {
-  @include tablet {
-    margin-bottom: 60px;
+/***** Section head — eyebrow + display heading + optional see-all *****/
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 28px;
+
+  .eyebrow {
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
   }
 
-  margin-bottom: 40px;
+  h2 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  a.see-all {
+    font-size: 0.92rem;
+    color: var(--primary);
+    font-weight: 600;
+    display: inline-flex;
+    gap: 6px;
+
+    &:hover { gap: 10px; }
+  }
 }
 
-.home-section h2 {
-  margin-bottom: 10px;
-  text-align: center;
+/***** Status banner — pulls up over the hero seam *****/
+.status-banner {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: -56px auto 0;
+  max-width: 1200px;
+  position: relative;
+  z-index: 3;
+  box-shadow: var(--shadow-card);
+
+  .dot-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: color-mix(in oklab, var(--brand-mint) 22%, var(--bg-elev));
+    flex-shrink: 0;
+
+    .status-dot { width: 10px; height: 10px; }
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  p {
+    margin: 2px 0 0;
+    font-size: 0.86rem;
+    color: var(--ink-mute);
+  }
+
+  a.linkish {
+    margin-left: auto;
+    font-size: 0.88rem;
+    color: var(--primary);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover { gap: 10px; }
+  }
 }
 
-/***** Promoted articles *****/
+/***** Categories grid *****/
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 
-.promoted-articles {
-  @include desktop { flex-direction: row; }
+  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 580px) { grid-template-columns: 1fr; }
+}
+
+.cat-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 24px 24px;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  position: relative;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 200px;
+  cursor: pointer;
+  color: inherit;
 
-  &-item {
-    @include desktop {
-      align-self: flex-end;
-      flex: 0 0 auto;
-      padding-right: 30px;
-      width: 33%; /* Three columns on desktop */
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+  }
 
-      [dir="rtl"] & { padding: 0 0 0 30px; }
-    }
+  .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: color-mix(in oklab, var(--primary) 18%, var(--bg-elev));
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
 
-    flex: 1 0 auto;
+  h3 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+    font-size: 1.55rem;
+    margin: 0;
+    color: var(--ink);
+  }
 
-    &:nth-child(3n) {
-      padding-right: 0;
-    }
+  p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
 
-    a {
-      display: block;
-      border-bottom: 1px solid $low-contrast-border-color;
-      padding: 15px 0;
-    }
+  .meta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
 
-    .icon-lock {
-      vertical-align: baseline;
-    }
-
-    &:last-child a {
-      @include desktop {
-        border-bottom: 1px solid $low-contrast-border-color;
-      }
-
-      border: 0;
+    .arrow {
+      color: var(--primary);
+      font-weight: 600;
+      transition: transform .2s;
     }
   }
 
+  &:hover .meta .arrow { transform: translateX(4px); }
 }
 
-/***** Community section in homepage *****/
-.community {
-  text-align: center;
+/***** Trending grid *****/
+.trending-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--bg-elev);
+  counter-reset: trending;
 
-  &-image {
-    min-height: 300px;
-    margin-top: 32px;
-    background-image: url($community_image);
-    background-position: center;
-    background-repeat: no-repeat;
-    max-width: 100%;
+  @media (max-width: 700px) { grid-template-columns: 1fr; }
+}
+
+.trending-item {
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  cursor: pointer;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  transition: background .15s;
+  color: inherit;
+  counter-increment: trending;
+
+  &:hover { background: var(--bg-tint); text-decoration: none; }
+  &:nth-child(2n) { border-right: none; }
+  &:nth-last-child(-n+2) { border-bottom: none; }
+
+  // When the item count is odd in the 2-col layout, the last item sits alone
+  // in its row — strip its dangling right border.
+  &:last-child:nth-child(odd) {
+    border-right: none;
   }
 
-  @include standalone-link;
+  @media (max-width: 700px) {
+    border-right: none;
+
+    &:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  }
+
+  &::before {
+    content: counter(trending, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.9;
+    min-width: 36px;
+    font-weight: var(--display-weight);
+  }
+
+  .item-body {
+    flex: 1;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .meta {
+    font-size: 0.8rem;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
 }
 
-.community,
-.activity {
-  border-top: 1px solid $low-contrast-border-color;
-  padding: 30px 0;
+/***** Contact CTA block (home page bottom) *****/
+.cta-block {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 44px 48px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    padding: 32px 28px;
+  }
+
+  .eyebrow {
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+  }
+
+  h2.display {
+    font-size: 2.2rem;
+    margin: 0 0 12px;
+  }
+
+  p {
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    max-width: 48ch;
+  }
+
+  .cta-cards {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+.contact-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  flex: 1;
+  min-width: 160px;
+
+  h4 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+}
+
+/***** Submit button — used in CTA + helpful widget *****/
+.submit-btn {
+  background: var(--primary);
+  color: var(--primary-ink);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 32px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: opacity .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover { opacity: 0.92; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
 }

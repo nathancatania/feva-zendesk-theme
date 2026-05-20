@@ -14,3 +14,6 @@ coverage/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Claude Design handoff bundle — reference only, not part of shipped theme
+coverly-support-center/

@@ -1,57 +1,80 @@
-<div class="container-divider"></div>
 <div class="container">
-  <div class="sub-nav">
-    {{breadcrumbs}}
-    <div class="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-      </svg>
-      {{search submit=false}}
+  <div class="wrap-narrow">
+    <div class="sub-nav">
+      {{breadcrumbs}}
+      <div class="search-container">
+        {{search scoped=settings.scoped_kb_search submit=false}}
+      </div>
     </div>
-  </div>
 
-  <h1>
-    {{t 'submit_a_request'}}
-  </h1>
+    <header class="page-header">
+      <div class="eyebrow mono">Contact support</div>
+      <h1>Submit a request</h1>
+      <p class="lead page-header-description">Tell us what's going on. Our travelers-staffing-the-inbox team replies within an hour.</p>
+    </header>
 
-  <div id="main-content" class="form">
-    <div id="new-request-form"></div>
+    <div id="main-content">
+      <form id="demo-request-form" class="contact-form" novalidate>
+        <div class="form-field">
+          <label for="demo-subject">Subject <span class="req">*</span></label>
+          <input id="demo-subject" name="subject" type="text" required placeholder="e.g. eSIM won't activate after install" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="demo-category">Inquiry type</label>
+            <select id="demo-category" name="category">
+              <option>General question</option>
+              <option>Installation help</option>
+              <option>Coverage / network issue</option>
+              <option>Billing or refund</option>
+              <option>Lost device or account access</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="demo-country">Destination country</label>
+            <input id="demo-country" name="country" type="text" placeholder="e.g. Japan" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="demo-description">Description <span class="req">*</span></label>
+          <textarea id="demo-description" name="description" required placeholder="What were you trying to do, what happened instead, and what device are you on?"></textarea>
+          <span class="hint">Tip: include your device model, iOS/Android version, and Coverly order number if you have it.</span>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m22 2-11 11"/><path d="m22 2-7 20-4-9-9-4 20-7z"/>
+          </svg>
+          <span>Submit request</span>
+        </button>
+      </form>
+
+      <div id="demo-request-success" class="success-state" hidden>
+        <div class="check" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12l5 5L20 7"/>
+          </svg>
+        </div>
+        <h2>Your request has been submitted.</h2>
+        <p>Our team will be in touch shortly.</p>
+        <div class="ref">REF-{{help_center.name}}-DEMO</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<script type="module">
-  import { renderNewRequestForm } from "new-request-form";
-
-  const container = document.getElementById("new-request-form");
-
-  const settings = {{json settings}};
-
-  const showSuggestedArticles = settings.show_suggested_articles ?? true;
-  const props = {
-    requestForm: {{json new_request_form}},
-    newRequestPath: {{json (page_path 'new_request')}},
-    parentId: {{json parent.id}},
-    parentIdPath: {{json parent.url}},
-    locale: {{json help_center.locale}},
-    baseLocale: {{json help_center.base_locale}},
-    hasAtMentions: {{json help_center.at_mentions_enabled}},
-    userRole: {{json user.role}},
-    userId: {{json user.id}},
-    brandId: {{json brand.id}},
-    organizations: {{json user.organizations}},
-    wysiwyg: true,
-    showSuggestedArticles: showSuggestedArticles,
-    answerBotModal: {
-      answerBot: {{#if answer_bot}}{{json answer_bot}}{{else}}null{{/if}},
-      answerBotGenerativeExperience: {{#if answer_bot_generative_experience}}{{json answer_bot_generative_experience}}{{else}}null{{/if}},
-      hasRequestManagement: {{json help_center.request_management_enabled}},
-      isSignedIn: {{json signed_in}},
-      helpCenterPath: {{json (page_path 'help_center')}},
-      requestsPath: {{json (page_path 'requests')}},
-      requestPath: {{json (page_path 'request' id=request_id)}}
-    },
-  };
-
-  renderNewRequestForm(settings, props, container);
+<script>
+  (function () {
+    var form = document.getElementById('demo-request-form');
+    var success = document.getElementById('demo-request-success');
+    if (!form || !success) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.hidden = true;
+      success.hidden = false;
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
 </script>

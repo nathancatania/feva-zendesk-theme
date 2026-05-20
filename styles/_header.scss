@@ -1,327 +1,166 @@
-/***** Header *****/
-$header-height: 71px;
-
 .header {
-  @include max-width-container;
-  position: relative;
-  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
   display: flex;
-  height: $header-height;
-  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 18px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.logo img {
-  max-height: 37px;
-  vertical-align: middle;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
 }
 
-.logo span {
-  margin: 0 10px;
-  color: $brand_color;
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: 1.6rem;
+  letter-spacing: var(--display-tracking);
+  color: var(--ink);
 }
 
-.logo a {
-  display: inline-block;
+.brand-sub {
+  font-size: 0.78rem;
+  color: var(--ink-mute);
+  margin-left: 4px;
 }
 
-.logo a:hover, .logo a:focus, .logo a:active {
-  text-decoration: none;
-}
+.nav {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+  align-items: center;
 
-.user-nav {
-  @include tablet { position: relative; }
-  display: inline-block;
-  position: absolute;
-  white-space: nowrap;
+  a {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    transition: color .15s;
 
-  &[aria-expanded="true"] {
-    background-color: #fff;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15), 0 4px 10px 0 rgba(0, 0, 0, .1);
-    border: solid 1px #ddd;
-    right: 0;
-    left: 0;
-    top: $header-height;
-    z-index: 1;
+    &:hover { color: var(--ink); }
+  }
 
-    > a {
-      display: block;
-      margin: 20px;
-    }
+  .pill {
+    background: var(--primary);
+    color: var(--primary-ink);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.88rem;
 
-    > .user-nav-list {
-      li {
-        display: block;
-      }
-
-      a {
-        display: block;
-        margin: 20px;
-      }
+    &:hover {
+      color: var(--primary-ink);
+      opacity: 0.92;
     }
   }
 }
 
-.user-nav-list {
-  display: block;
-  list-style: none;
+/***** Mobile drawer (adapted from Copenhagen, restyled for dark surface) *****/
+.nav-wrapper-mobile {
+  display: none;
 
-  > li {
-    display: inline-block;
+  @media (max-width: 800px) {
+    display: block;
+    margin-left: auto;
   }
 }
 
 .nav-wrapper-desktop {
-  @include mobile { display: none; }
-  @include tablet { display: none; }
-  @include desktop { display: inline-block; }
+  // Push the desktop nav (and everything inside it) to the right of the header-inner flex row.
+  // .nav itself also has margin-left: auto, but it's wrapped in this div which is the actual
+  // flex item of .header-inner — so the auto-margin needs to be here to push right.
+  margin-left: auto;
 
-  a {
-    @include tablet {
-      display: inline-block;
-    }
-
-    border: 0;
-    color: $link_color;
+  @media (max-width: 800px) {
     display: none;
-    font-size: 14px;
-    padding: 0 20px 0 0;
-    width: auto;
-
-    [dir="rtl"] & { padding: 0 0 0 20px;}
-
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: transparent;
-      color: $link_color;
-      text-decoration: underline;
-    }
   }
 }
 
-.nav-wrapper-mobile {
-  @include desktop { display: none; }
+.menu-button-mobile {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
-  .menu-button-mobile {
-    background: none;
-    border: 0;
-    width: auto;
-    min-width: 71px;
-    cursor: pointer;
+  .icon-menu { color: var(--ink); }
+}
 
-    .icon-menu {
-      padding: 7px;
-      vertical-align: middle;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-    }
+.menu-list-mobile {
+  display: none;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  position: absolute;
+  right: 32px;
+  top: 64px;
+  min-width: 240px;
+  box-shadow: var(--shadow-card);
 
-    &[aria-expanded="true"] {
-      .icon-menu {
-        background: #f3f3f3;
-      }
-    }
-  }
+  &[aria-expanded="true"] { display: block; }
 
-  .menu-list-mobile {
-    position: absolute;
-    background-color: #fff;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .15);
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    right: 0;
-    left: 0;
-    top: $header-height;
-    z-index: 2;
-
-    &[aria-expanded="false"] {
-      display: none;
-    }
-
-    &[aria-expanded="true"] {
-      display: block;
-    }
-  }
-
-  .menu-list-mobile-items {
-    .item {
-      margin: 4px 0;
-    }
-
-    li:empty:not(.nav-divider){
-      display: none;
-    }
-
-    .nav-divider {
-      border-bottom: 0.1px solid #ddd;
-      padding: 0;
-
-      &:last-child {
-        display: none;
-      }
-    }
-
-    button {
-      background: none;
-      border: none;
-      padding: 8px 24px;
-
-      width: 100%;
-      height: 100%;
-      color: $text_color;
-      cursor: pointer;
-      text-align: start;
-
-      &:active, &:focus, &:hover {
-        background-color: #f3f3f3;
-        text-decoration: underline;
-      }
-    }
-
-    a {
-      display: block;
-      padding: 8px 24px;
-      width: 100%;
-      height: 100%;
-      color: $text_color;
-
-      &:active, &:focus, &:hover {
-        background-color: #f3f3f3;
-      }
-    }
-
-    .my-profile {
-      display: flex;
-      line-height: 1.5;
-
-      .my-profile-tooltip {
-        font-size: 12px;
-        color: #68737D;
-      }
-    }
-
-    .menu-profile-avatar {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
-      margin-top: 1px;
-
-      [dir="rtl"] & {
-        margin-right: 0;
-        margin-left: 8px;
-      }
-    }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li.item { padding: 8px 4px; }
+  li.item a { color: var(--ink-soft); font-size: 0.92rem; }
+  li.item a:hover { color: var(--ink); }
+  .nav-divider {
+    border-top: 1px solid var(--line);
+    margin: 10px 0;
   }
 }
 
 .skip-navigation {
-  align-items: center;
-  background-color: black;
-  color: white;
-  display: flex;
-  font-size: 14px;
-  justify-content: center;
-  left: -999px;
-  margin: 20px;
-  padding: 20px;
-  overflow: hidden;
   position: absolute;
-  top: auto;
-  z-index: -999;
+  left: -10000px;
 
-
-  [dir="rtl"] & {
-    left: initial;
-    right: -999px;
-  }
-
-  &:focus,
-  &:active {
-    left: auto;
-    overflow: auto;
-    text-align: center;
-    text-decoration: none;
-    top: auto;
-    z-index: 999;
-
-
-  [dir="rtl"] & {
-    left: initial;
-    right: auto;
-  }
+  &:focus {
+    left: 16px;
+    top: 16px;
+    background: var(--bg-elev);
+    color: var(--ink);
+    padding: 8px 12px;
+    border-radius: 6px;
+    z-index: 100;
   }
 }
 
-// Disable the skip-navigation link when modals are open
-#zd-modal-container ~ .skip-navigation {
-  display: none;
-}
+/***** Signed-in user dropdown (uses Copenhagen .dropdown markup) *****/
+.user-info {
+  margin-left: 8px;
 
-// Garden-style primary "Ask AI" button used in the header navigation.
-// Mirrors `<Button isPrimary><Button.StartIcon><SparkleIcon /></Button.StartIcon> Ask AI</Button>`.
-// Uses the theme's `link_color` / `hover_link_color` settings so the button
-// stays coherent with link styling even when admins customize the theme.
-.ask-ai {
-  align-items: center;
-  background-color: $link_color;
-  border: 1px solid $link_color;
-  border-radius: 4px;
-  color: $brand_text_color;
-  display: inline-flex;
-  font-size: 14px;
-  font-weight: $font-weight-semibold;
-  gap: 6px;
-  line-height: 1.4286;
-  padding: 6px 14px;
+  .dropdown-toggle {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
-  &:visited {
-    color: $brand_text_color;
-  }
-
-  .ask-ai-icon {
-    flex-shrink: 0;
-  }
-}
-
-.nav-wrapper-desktop .ask-ai {
-  margin-inline-end: 16px;
-  padding: 6px 14px;
-
-  &,
-  &:visited {
-    color: $brand_text_color;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: $hover_link_color;
-    border-color: $hover_link_color;
-    color: $brand_text_color;
-    text-decoration: none;
-  }
-}
-
-.nav-wrapper-mobile .ask-ai {
-  margin: 4px 24px;
-  padding: 6px 14px;
-  width: auto;
-  height: auto;
-
-  &,
-  &:visited {
-    color: $brand_text_color;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: $hover_link_color;
-    border-color: $hover_link_color;
-    color: $brand_text_color;
-    text-decoration: none;
+    .user-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+    }
   }
 }

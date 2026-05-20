@@ -1,54 +1,38 @@
-/***** Section pages *****/
-.section {
-  &-container {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  &-content {
-    @include desktop {
-      flex: 0 0 80%;
-    }
-    flex: 1;
-    max-width: 100%
-  }
-
-  &-subscribe button {
-    @extend .button;
-    &[data-selected="true"] {
-      @extend .button-primary;
-    }
-  }
-}
+// Section page reuses the .page-header, .section-block, .article-list,
+// and .article-list-item rules from _category.scss. This partial adds
+// the small bits unique to the section page.
 
 .section-list {
-  margin: 40px 0;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 
-.section-list-item {
-  border-bottom: 1px solid $low-contrast-border-color;
-  font-size: $font-size-bigger;
-  padding: 15px 0;
+.section-list-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  font-weight: 500;
+  transition: border-color .15s, transform .15s;
 
-  &:first-child {
-    border-top: 1px solid $low-contrast-border-color;
+  &:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-1px);
+    text-decoration: none;
   }
 
-  a {
-    align-items: center;
-    color: $text_color;
-    display: flex;
-    justify-content: space-between;
-  }
+  svg { color: var(--ink-mute); }
 }
 
-.see-all-sections-trigger {
-  cursor: pointer;
-  display: block;
-  padding: 15px;
-  text-align: center;
-
-  &[aria-hidden="true"] {
-    display: none;
-  }
+.section-subscribe {
+  margin-top: 18px;
 }
