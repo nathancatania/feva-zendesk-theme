@@ -114,6 +114,15 @@
   }
 
   .searchbar { position: relative; z-index: 1; }
+
+  // Copenhagen's src/search.js appends a .clear-button as a direct child of any
+  // form[role="search"] containing an input[type="search"]. Our hero form
+  // matches both, so the JS injects a button as a sibling of .searchbar — visually
+  // a floating square below the search bar. We don't need a clear button in the
+  // hero (Escape still works via the JS keyup handler on the input); hide it.
+  > .clear-button {
+    display: none;
+  }
 }
 
 @property --ang {
