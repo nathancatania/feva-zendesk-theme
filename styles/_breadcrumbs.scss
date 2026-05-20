@@ -3,6 +3,11 @@
 
 .crumbs,
 .breadcrumbs {
+  // Zendesk's {{breadcrumbs}} helper emits <ol class="breadcrumbs">, which
+  // inherits decimal markers and 40px inline-start padding from the UA. Reset
+  // here so the markup-vs-design alignment matches and "1." / "2." don't show.
+  list-style: none;
+  margin: 0;
   display: flex;
   gap: 8px;
   align-items: center;
