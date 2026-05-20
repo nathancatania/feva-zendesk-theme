@@ -1,0 +1,141 @@
+/***** Contact form (used by the new-request demo page) *****/
+.contact-form {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 36px;
+  margin-bottom: 32px;
+
+  @media (max-width: 600px) {
+    padding: 24px 18px;
+  }
+}
+
+.form-field {
+  margin-bottom: 22px;
+
+  label {
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 7px;
+
+    .req {
+      color: #d04848;
+      margin-left: 3px;
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg);
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.96rem;
+    transition: border-color .15s, box-shadow .15s;
+
+    &::placeholder {
+      color: var(--ink-mute);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 18%, transparent);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.5;
+  }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%236E7FA4' d='M0 0h10L5 6 0 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    background-color: var(--bg);
+  }
+
+  .hint {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    margin-top: 6px;
+  }
+
+  .error-msg {
+    display: block;
+    color: #d04848;
+    font-size: 0.84rem;
+    margin-top: 6px;
+  }
+
+  &.has-error {
+    input, textarea, select { border-color: #d04848; }
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  .form-field { margin-bottom: 22px; }
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.success-state {
+  text-align: center;
+  padding: 56px 32px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin-bottom: 32px;
+
+  .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--brand-mint) 25%, var(--bg-elev));
+    color: var(--brand-mint-deep);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 18px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+
+  p {
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+
+  .ref {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    margin-top: 12px;
+  }
+}
