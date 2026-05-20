@@ -17,13 +17,22 @@
       </p>
 
       <h2 class="visibility-hidden">{{t 'search'}}</h2>
-      <div class="search-glow" style="max-width: 720px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" focusable="false" viewBox="0 0 24 24" class="search-icon" aria-hidden="true" style="position: absolute; left: 22px; top: 50%; transform: translateY(-50%); z-index: 2;">
-          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <path stroke="currentColor" stroke-linecap="round" stroke-width="1.6" d="m20 20-3.5-3.5"/>
-        </svg>
-        {{search submit=false instant=settings.instant_search class='searchbar'}}
-      </div>
+      {{!--
+        Hero search uses a custom form (not the {{search}} helper) so we control the
+        placeholder copy and submit-button label. Trade-off: no instant-search
+        autocomplete in the hero. The sub-nav search on category/section/article pages
+        still uses {{search}} with autocomplete.
+      --}}
+      <form action="{{page_path 'search_results'}}" method="get" role="search" class="search-glow" style="max-width: 720px;">
+        <div class="searchbar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="search-icon" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m20 20-3.5-3.5"/>
+          </svg>
+          <input type="search" name="query" placeholder="Search for &#39;install on iPhone&#39;, &#39;no data&#39;, &#39;refund&#39;…" aria-label="{{t 'search'}}" />
+          <button type="submit">Search</button>
+        </div>
+      </form>
 
       <div class="quick-chips">
         <span style="font-size: .84rem; opacity: .85; margin-right: 4px;">Popular:</span>
@@ -66,47 +75,6 @@
     </div>
   </div>
 
-  <section class="block">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Browse by topic</div>
-          <h2>Find your answer faster.</h2>
-        </div>
-      </div>
-      <div class="cat-grid">
-        {{#each categories}}
-          <a href="{{url}}" class="cat-card">
-            <div class="icon">
-              {{!-- Match against category.name (category.id is a numeric Zendesk ID). Admins renaming a category should update these strings. --}}
-              {{#is name "Getting started"}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m16 8-3 6-6 3 3-6 6-3z"/></svg>
-              {{else}}{{#is name "Installing your eSIM"}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
-              {{else}}{{#is name "Plans & coverage"}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a13 13 0 0 1 0 18"/><path d="M12 3a13 13 0 0 0 0 18"/></svg>
-              {{else}}{{#is name "Account & billing"}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M16 12h3"/></svg>
-              {{else}}{{#is name "Troubleshooting"}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0 5 5L19 12l-7 7a3 3 0 1 1-4-4l7-7z"/></svg>
-              {{else}}{{#is name "Travel tips"}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 11v5"/></svg>
-              {{else}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
-              {{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}
-            </div>
-            <h3>{{name}}</h3>
-            <p>{{excerpt description}}</p>
-            <div class="meta">
-              <span>{{sections.length}} sections</span>
-              <span class="arrow">→</span>
-            </div>
-          </a>
-        {{/each}}
-      </div>
-    </div>
-  </section>
-
   {{#if promoted_articles}}
     <section class="block-tight">
       <div class="wrap">
@@ -129,6 +97,59 @@
       </div>
     </section>
   {{/if}}
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Browse by topic</div>
+          <h2>Find your answer faster.</h2>
+        </div>
+      </div>
+      <div class="cat-grid">
+        {{#each categories}}
+          <a href="{{url}}" class="cat-card">
+            <div class="icon">
+              {{!-- Match against category.name (category.id is a numeric Zendesk ID). Admins renaming a category should update these strings — see AGENTS.md. --}}
+              {{#is name "Getting Started with Coverly"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m16 8-3 6-6 3 3-6 6-3z"/></svg>
+              {{else}}{{#is name "Buying Plans & Billing"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M16 12h3"/></svg>
+              {{else}}{{#is name "Installing & Activating Your eSIM"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+              {{else}}{{#is name "Device Compatibility"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+              {{else}}{{#is name "Coverage & Networks"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a13 13 0 0 1 0 18"/><path d="M12 3a13 13 0 0 0 0 18"/></svg>
+              {{else}}{{#is name "Using the Coverly Mobile App"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+              {{else}}{{#is name "Account, Privacy & Security"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
+              {{else}}{{#is name "Troubleshooting"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0 5 5L19 12l-7 7a3 3 0 1 1-4-4l7-7z"/></svg>
+              {{else}}{{#is name "Destination & Region Guides"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 11v5"/></svg>
+              {{else}}{{#is name "Coverly for Business"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              {{else}}{{#is name "Coverly Stores & Airport Kiosks"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              {{else}}{{#is name "About Coverly"}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
+              {{else}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+              {{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}{{/is}}
+            </div>
+            <h3>{{name}}</h3>
+            <p>{{excerpt description}}</p>
+            <div class="meta">
+              <span>{{sections.length}} sections</span>
+              <span class="arrow">→</span>
+            </div>
+          </a>
+        {{/each}}
+      </div>
+    </div>
+  </section>
 
   <section class="block-tight">
     <div class="wrap">
