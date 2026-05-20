@@ -81,6 +81,11 @@
 }
 
 .nav-wrapper-desktop {
+  // Push the desktop nav (and everything inside it) to the right of the header-inner flex row.
+  // .nav itself also has margin-left: auto, but it's wrapped in this div which is the actual
+  // flex item of .header-inner — so the auto-margin needs to be here to push right.
+  margin-left: auto;
+
   @media (max-width: 800px) {
     display: none;
   }
